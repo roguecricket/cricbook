@@ -39,9 +39,10 @@ class ScoreBoard extends Component{
   }
 
   render(){
-    const {runs, wickets, overs , batsmans, bowlers } = this.props;
+    const {runs, wickets, overs , batsmans, bowlers, team1, team2 } = this.props;
 
     return (<div className="">
+      <h1> Team {team1} </h2>
       <h1> Runs {runs} / {wickets}</h1>
       <h2> Overs {overs} </h2>
       <h3>
@@ -74,7 +75,9 @@ ScoreBoard.defaultProps = {
   bowlers: [],
   runs: 0,
   overs: 0.0,
-  wickets: 0
+  wickets: 0,
+  team1: "Team A",
+  team2: "Team B"
 }
 
 export default ScoreBoard;
