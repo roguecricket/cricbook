@@ -1,11 +1,15 @@
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
 import { reducer as formReducer } from "redux-form";
-import match from './match';
+import meta from './meta';
+import playing from './playing';
+import currentover from './currentover';
 
 
 // main reducers
 export const reducers = combineReducers({
   routing: routerReducer,
-  match
+  meta,
+  playing,
+  currentover
 });
