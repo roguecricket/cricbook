@@ -42,7 +42,7 @@ class ScoreBoard extends Component{
     const {runs, wickets, overs , batsmans, bowlers, team1, team2 } = this.props;
 
     return (<div className="">
-      <h1> Team {team1} </h2>
+      <h1> Team {team1} </h1>
       <h1> Runs {runs} / {wickets}</h1>
       <h2> Overs {overs} </h2>
       <h3>

@@ -6,6 +6,7 @@ import freeze from "redux-freeze";
 import { reducers } from "./reducers/index";
 import { sagas } from "./sagas/index";
 import devToolsEnhancer, { composeWithDevTools }  from 'remote-redux-devtools';
+import DevTools from './dev/devTool';
 
 // add the middlewares
 let middlewares = [];
@@ -22,16 +23,29 @@ middlewares.push(sagaMiddleware);
 middlewares.push(freeze);
 // }
 
+// if(process.env.NODE_ENV == 'development'){
+//   middlewares.push(DevTools.instrument());
+// }
+
 // apply the middleware
 let middleware = applyMiddleware(...middlewares);
 
-// add the redux dev tools
+// // add the redux dev tools
 // if (process.env.NODE_ENV !== 'production' && window.devToolsExtension) {
 //   middleware = compose(middleware);
 // }
 
 // create the store
-const store = createStore(reducers, composeWithDevTools(middleware));
+let enhancers;
+
+if(process.env.NODE_ENV == 'production'){
+  enhancers =  compose(middleware);
+}
+else{
+  enhancers =  compose(middleware, DevTools.instrument());
+}
+
+const store = createStore(reducers, {}, enhancers);
 const history = syncHistoryWithStore(browserHistory, store);
 sagaMiddleware.run(sagas);
 
