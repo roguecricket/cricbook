@@ -1,89 +1,35 @@
-import React, {Component, PropTypes} from 'react';
-
-class Batting extends Component{
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-    const {name, onstrike, runs, ballsfaced} = this.props;
-    return (<div>
-            <span> name: {name} </span>
-            <span> onstrike: {onstrike} </span>
-            <span> runs: {runs} </span>
-            <span> ballsfaced: {ballsfaced} </span>
-           </div>)
-  }
-}
-
-class Bowling extends Component{
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-    const {name, maidens, wickets, runs, overs} = this.props;
-    return (<div>
-            <span> name: {name} </span>
-            <span> maidens: {maidens} </span>
-            <span> runs: {runs} </span>
-            <span> wickets: {wickets} </span>
-            <span> overs: {overs} </span>
-            </div>)
-  }
-}
+import React, {
+  Component,
+  PropTypes
+} from 'react';
+import {
+  Grid
+} from 'semantic-ui-react';
+import ScoreGrid from '../elements/ScoreGrid';
+import {connect} from 'react-redux';
 
 class ScoreBoard extends Component{
-  constructor(props){
-    super(props);
-  }
-
   render(){
-    const {runs, wickets, overs , batsmans, bowlers, team1, team2 } = this.props;
-
-    return (<div className="">
-      <h1> Team {team1} </h1>
-      <h1> Runs {runs} / {wickets}</h1>
-      <h2> Overs {overs} </h2>
-      <h3>
-      {
-         batsmans.map(function(man){
-           return <Batting name={man.name}
-                           onstrike={man.onstrike}
-                           runs={man.runs}
-                           ballsfaced={man.ballsfaced}/>
-         })
-      }
-      </h3>
-      <label> Add Batsman </label>
-      <input type="text" ref="addbat" name="batsman"  placeholder="enter the name"/>
-      <h3>
-      {
-        bowlers.map(function(man){
-          return <Bowling name={man.name}
-                          maidens={man.maidens}
-                          wickets={man.wickets}
-                          runs={man.runs}
-                          overs={man.overs}/>
-        })
-      }
-      </h3>
-      <label> Add Bowler </label>
-      <input type="text" ref="addbowler" name="bowling"  placeholder="enter the name"/>
-    </div>)
+    const {gridprops} = this.props;
+    return (
+      <Grid>
+      <ScoreGrid {...gridprops}></ScoreGrid>
+      </Grid>);
   }
 }
 
-ScoreBoard.defaultProps = {
-  batsmans: [],
-  bowlers: [],
-  runs: 0,
-  overs: 0.0,
-  wickets: 0,
-  team1: "Team A",
-  team2: "Team B"
+
+let mapStateToProps = (state) => {
+  return {gridprops: {
+    runs: state.playing.runs,
+    batting_team: state.playing.batting,
+    wickets: state.playing.wickets,
+    overs: state.playing.overs,
+    batting: [state.current_over.strike, state.current_over.nonstrike],
+    bowling: [state.current_over.bowling]
+  }}
 }
 
-
+ScoreBoard = connect(mapStateToProps)(ScoreBoard)
 
 export default ScoreBoard;

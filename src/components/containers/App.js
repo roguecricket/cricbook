@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import DevTools from '../../dev/devTool';
+import {Container} from 'semantic-ui-react';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -9,10 +10,10 @@ class App extends Component{
   }
 
   render(){
-    return (<div className="container">
+    return (<Container>
                {this.props.children}
                {!isProduction && <DevTools />}
-            </div>)
+            </Container>)
   }
 }
 
