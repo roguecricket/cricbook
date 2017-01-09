@@ -55,6 +55,8 @@ class ScoreBoard extends Component{
          })
       }
       </h3>
+      <label> Add Batsman </label>
+      <input type="text" ref="addbat" name="batsman"  placeholder="enter the name"/>
       <h3>
       {
         bowlers.map(function(man){
@@ -66,6 +68,8 @@ class ScoreBoard extends Component{
         })
       }
       </h3>
+      <label> Add Bowler </label>
+      <input type="text" ref="addbowler" name="bowling"  placeholder="enter the name"/>
     </div>)
   }
 }
@@ -79,5 +83,7 @@ ScoreBoard.defaultProps = {
   team1: "Team A",
   team2: "Team B"
 }
+
+
 
 export default ScoreBoard;
