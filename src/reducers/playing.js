@@ -5,6 +5,7 @@ export default function playing(state={}, action){
           return Object.assign({}, state, {
             batting: action.batting,
             bowling: action.bowling,
+            innings: action.innings,
             runs: 0,
             wickets: 0,
             overs: 0,

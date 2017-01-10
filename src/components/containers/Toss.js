@@ -34,11 +34,11 @@ class Toss extends Component{
     teams.splice(teams.indexOf(won), 1);
     const other = teams[0];
     if(decision == 'batting'){
-      this.props.newInnings(won, other);
+      this.props.newInnings(won, other, 1);
     }else{
-      this.props.newInnings(other, won);
+      this.props.newInnings(other, won, 1);
     }
-    browserHistory.push("/board");
+    browserHistory.push("/batting");
   }
 }
 

@@ -21,7 +21,7 @@ const app_state = {
     runs: 0,
     wickets: 0
   },
-  batting: [[]],
+  batting: {units:[[]]},
   bowling: [[]],
   falling: [[]],
   overs: [[]]

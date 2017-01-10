@@ -1,8 +1,9 @@
-export function newInnings(batting, bowling){
+export function newInnings(batting, bowling, innings){
   return {
     type: "NEW_INNINGS",
     batting: batting,
-    bowling: bowling
+    bowling: bowling,
+    innings: innings
   }
 }
 
