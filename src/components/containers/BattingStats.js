@@ -31,7 +31,8 @@ class BattingTable extends Component{
     const {unplayed, played, innings} = this.props;
     return (
      <Form onSubmit={this.handleSubmit.bind(this)}>
-      <AddPlayerModal open={this.state.onModalOpen}
+      <AddPlayerModal heading="Add a Batsman"
+                      open={this.state.onModalOpen}
                       onOk={this.onNew.bind(this)}
                       onClose={this.onModalClose.bind(this)} />
       <Table>
@@ -46,7 +47,7 @@ class BattingTable extends Component{
         <Table.Body>
           {
             played.map((bat) => (
-              <Table.Row negative={bat.isOut}>
+              <Table.Row negative={bat.isOut} positive={!bat.isOut}>
                 <Table.Cell>{bat.name}</Table.Cell>
                 <Table.Cell>{bat.runs}</Table.Cell>
                 <Table.Cell>{bat.balls}</Table.Cell>
@@ -89,6 +90,7 @@ class BattingTable extends Component{
   handleSubmit(e, data){
     e.preventDefault();
     console.log(data.formData);
+    browserHistory.push('/bowling');
   }
 
   handleSelectChange(e, data){
@@ -136,7 +138,7 @@ let mapDispatchToProps = (dispatch) => {
 let mapStateToProps = (state) => {
   console.log(state);
   return {
-    unplayed: changeObjectsToSelectProps(state.batting.filter((bat) => bat.inPavilion && !bat.isOut), 'name'),
+    unplayed: changeObjectsToSelectProps(state.batting.filter((bat) => bat.inPavilion && !bat.isOut && bat.innings == state.playing.innings), 'name'),
     played: state.batting.filter((bat) => !bat.inPavilion),
     active: state.batting.filter((bat) => !bat.inPavilion && !bat.isOut),
     innings: state.playing.innings

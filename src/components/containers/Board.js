@@ -25,8 +25,9 @@ let mapStateToProps = (state) => {
     batting_team: state.playing.batting,
     wickets: state.playing.wickets,
     overs: state.playing.overs,
-    batting: [state.current_over.strike, state.current_over.nonstrike],
-    bowling: [state.current_over.bowling]
+    innings: state.playing.innings,
+    batting: state.batting.filter((bat) => bat.innings == state.playing.innings && !bat.isOut && !bat.inPavilion),
+    bowling: []
   }}
 }
 

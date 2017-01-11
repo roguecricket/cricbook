@@ -6,6 +6,7 @@ import ScoreBoard from './components/containers/Board';
 import Meta from './components/containers/MetaComponent';
 import Toss from './components/containers/Toss';
 import BattingTable from './components/containers/BattingStats';
+import BowlingTable from './components/containers/BowlingStats';
 
 // build the router
 const router = (
@@ -14,6 +15,7 @@ const router = (
       <IndexRoute component={Meta}/>
       <Route path="toss" component={Toss} />
       <Route path="batting" component={BattingTable}></Route>
+      <Route path="bowling" component={BowlingTable}></Route>
       <Route path="board" component={ScoreBoard} />
     </Route>
   </Router>

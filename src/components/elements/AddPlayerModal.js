@@ -20,7 +20,7 @@ class AddPlayerModal extends Component{
 
   render(){
     return (<Modal open={this.props.open} onClose={this.props.onClose} basic size='small'>
-           <Header icon='alarm' content='Add a Batsman' />
+           <Header icon='alarm' content={this.props.heading}/>
            <Form onSubmit={this.props.onOk}>
            <Modal.Content>
               <Form.Field>

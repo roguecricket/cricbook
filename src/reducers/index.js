@@ -5,6 +5,7 @@ import meta from './meta';
 import playing from './playing';
 import currentover from './currentover';
 import batting from './batting';
+import bowling from './bowling';
 
 
 // main reducers
@@ -13,5 +14,6 @@ export const reducers = combineReducers({
   meta,
   playing,
   currentover,
-  batting
+  batting,
+  bowling
 });
