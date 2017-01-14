@@ -6,6 +6,7 @@ import playing from './playing';
 import currentover from './currentover';
 import batting from './batting';
 import bowling from './bowling';
+import overs from './overs';
 
 
 // main reducers
@@ -15,5 +16,6 @@ export const reducers = combineReducers({
   playing,
   currentover,
   batting,
-  bowling
+  bowling,
+  overs
 });
