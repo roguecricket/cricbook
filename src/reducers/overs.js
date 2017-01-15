@@ -1,6 +1,6 @@
 export default function overs(state = [], action) {
   switch (action.type) {
-    case "NEW_OVER":
+    case "NEXT_OVER":
       return [...state, {
         innings: action.innings,
         over: action.over,

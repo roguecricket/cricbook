@@ -1,37 +1,37 @@
-export function changeStrike(){
+export function selectBowler(bowler){
   return {
-    type: 'CHANGE_STRIKE'
+    type: 'BOWLER_SELECTED',
+    bowler
   }
 }
 
-export function updateStrike(player){
+export function showPromptForBowler(){
   return {
-    type: 'UPDATE_STRIKE',
-    strike: player
+    type: 'NEW_OVER_TO_BOWL'
   }
 }
 
-export function updateNonStrike(player){
+export function closeBowlingPrompt(){
   return {
-    type: 'UPDATE_NONSTRIKE',
-    nonstrike: player
+    type: 'CANCEL_BOWLING_PROMPT'
   }
 }
 
-export function initOver(bowler, strike, nonstrike){
-  return {
-    type: "INIT_OVER",
-    bowling: bowler,
-    strike: strike,
-    nonstrike: nonstrike
+export function selectBatsman(batsman){
+  return{
+    type: 'BATSMAN_SELECTED',
+    batsman
   }
 }
 
-export function updateWicketsAndBalls(runs, balls, wickets){
+export function showPromptForBatsman(){
   return {
-    type: "UPDATE_BALL_RUNS_WICKETS",
-    runs,
-    balls,
-    wickets
+    type: "WICKET_HAS_FALLEN"
+  }
+}
+
+export function closeBattingPrompt(){
+  return {
+    type: "CANCEL_BATSMAN_PROMPT"
   }
 }

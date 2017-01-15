@@ -7,7 +7,7 @@ import currentover from './currentover';
 import batting from './batting';
 import bowling from './bowling';
 import overs from './overs';
-
+// import appview from './appview';
 
 // main reducers
 export const reducers = combineReducers({

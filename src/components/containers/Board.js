@@ -10,21 +10,42 @@ import ScoreGrid from '../elements/ScoreGrid'
 import BallPrompt from '../elements/BallPrompt'
 import BattingGrid from '../elements/BattingGrid';
 import BowlingGrid from '../elements/BowlingGrid';
+import AddPlayerModal from '../elements/AddPlayerModal';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions';
+import SelectPlayers from '../elements/SelectPlayer';
+import * as bowlingUtils from '../../utils/bowlingUtils';
 
 class ScoreBoard extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      onBallPrompt: false
+      onBallPrompt: false,
+      onBowlerModelOpen: false,
+      onBattingModelOpen: false
     }
   }
 
   componentDidMount(){
+    const {overs} = this.props;
+    const length = overs.length;
+    const currentover = overs[length-1];
 
+    if(!currentover){
+      this.props.showPromptForBowler();
+      return;
+    }
+
+    const bowled = bowlingUtils.getOverInfo(currentover.figures);
+    console.log(bowled);
+
+    if(bowled.balls  >= 6){
+      this.props.showPromptForBowler();
+      return;
+    }
+    this.openRunModel();
   }
 
   render(){
@@ -35,6 +56,28 @@ class ScoreBoard extends Component{
                   onClose={this.handleClose.bind(this)}
                   onOk={this.handleRuns.bind(this)}
                   heading= "Add Runs and Wickets"/>
+
+      <AddPlayerModal heading="Add a Bowler"
+                      open={this.state.onBowlerModelOpen}
+                      onOk={this.onNewBowler.bind(this)}
+                      onClose={this.onBowlerModalClose.bind(this)} />
+
+       <SelectPlayers heading="Select Batsman"
+                      players={this.props.batsmans}
+                      ref="sbastman"
+                      open={this.props.promptBatsmanSelect}
+                      onClose={this.handleBatsmanPromptClose.bind(this)}
+                      onOk={this.addBatsmanOnWicket.bind(this)}
+                      onHandleChange={this.changeBatsman.bind(this)}/>
+
+       <SelectPlayers heading="Select Bowler"
+                      players={this.props.bowlers}
+                      ref="sbowler"
+                      open={this.props.promptBowlerSelect}
+                      onClose={this.handleBowlerPromptClose.bind(this)}
+                      onOk={this.addBowlerForOver.bind(this)}
+                      onHandleChange={this.changeBowler.bind(this)}/>
+
       <ScoreGrid {...gridprops}></ScoreGrid>
         <Grid.Row centered>
           <Grid.Column width={10}>
@@ -65,8 +108,9 @@ class ScoreBoard extends Component{
 
   handleClose(){
     this.setState({
-      onBallPrompt: false
-    })
+      onBallPrompt: false,
+    });
+
   }
 
   handleRuns(e, data){
@@ -95,6 +139,60 @@ class ScoreBoard extends Component{
     this.props.addBowler(player, this.props.innings);
   }
 
+  addBatsmanOnWicket(e, data){
+    e.preventDefault();
+    console.log(data);
+  }
+
+  addBowlerForOver(e, data){
+    e.preventDefault();
+    console.log(data);
+    console.log(this);
+    this.props.selectBowler(data.formData.player);
+    this.props.nextOver(this.props.gridprops.innings,
+                        this.props.overs.length, data.formData.player);
+
+
+  }
+
+  changeBowler(e, data){
+    console.log(data)
+    const {value} = data;
+    if(value == "ADD"){
+       this.setState({
+         onBowlerModelOpen: true
+       })
+    }
+  }
+
+  changeBatsman(e, data){
+
+  }
+
+  handleBowlerPromptClose(e){
+    //  this.props.closeBowlingPrompt();
+  }
+
+  handleBatsmanPromptClose(e){
+    // this.props.closeBattingPrompt();
+  }
+
+  onBowlerModalClose(e){
+    this.setState({
+      onBowlerModelOpen: false
+    })
+  }
+
+  onNewBowler(e, data){
+    e.preventDefault();
+    console.log(data);
+    const {player} = data.formData;
+    this.props.addBowler(player, this.props.innings);
+    this.setState({
+      onBowlerModelOpen: false
+    })
+  }
+
 }
 
 let mapStateToProps = (state) => {
@@ -108,8 +206,12 @@ let mapStateToProps = (state) => {
     overs: state.overs[state.playing.overs],
     bowlers: state.bowling.filter((bowl) => bowl.innings == state.playing.innings && overs && bowl.name == overs.bowler)
   },
-  batsmans: state.batting,
-  bowlers: state.bowling
+  batsmans: state.batting.filter((bat) => bat.innings == state.playing.innings),
+  bowlers: state.bowling.filter((bowl) => bowl.innings == state.playing.innings),
+  promptBowlerSelect: state.currentover.promptBowlerSelect,
+  promptBatsmanSelect: state.currentover.promptBatsmanSelect,
+  overs: state.overs.filter((over) => over.innings == state.playing.innings),
+  innings: state.playing.innings
   }
 }
 

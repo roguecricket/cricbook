@@ -19,6 +19,7 @@ export default function playing(state={}, action){
         return Object.assign({}, state, {
           is_complete: true
         });
+     
      default:
        return state;
     }
