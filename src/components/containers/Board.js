@@ -25,20 +25,23 @@ class ScoreBoard extends Component{
       onBallPrompt: false,
       onBowlerModelOpen: false,
       onBowlerSelect: true,
-      onBattingModelOpen: false
+      onBattingModelOpen: false,
+      bowlerAlreadySelected: false
     }
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.balls % 6 == 0 && nextProps.balls != 0 ){
+    console.log("Overs:",nextProps.overs);
+    if(nextProps.balls % 6 == 0 && nextProps.balls != 0 && !this.state.bowlerAlreadySelected){
       this.setState({
         onBowlerSelect: true
-      })
+      });
     }
   }
 
   render(){
     const {gridprops, balls} = this.props;
+    console.log("Overs:",this.props.overs);
 
     return (
       <Grid>
@@ -105,17 +108,32 @@ class ScoreBoard extends Component{
 
   handleRuns(e, data){
     e.preventDefault();
-    console.log(data);
     const {runs, extra} = data.formData;
-    console.log(bowlingUtils.getRuns(data.formData));
     const is_ball = extra && extra != "WICKET" ? 0 : 1;
-    console.log("next ball")
-    this.props.nextBall(data.formData, this.props.current_over, this.props.innings);
-    this.props.updateScore(bowlingUtils
-                           .getRuns(data.formData)
-                           .toString(), is_ball);
+    const is_extra = !bowlingUtils.isExtra(data.formData)
+    const calculated = bowlingUtils.getRuns(data.formData);
+    console.log("CurrentOver: ", this.props.current_over);
+    this.props.nextBall(data.formData,
+                        this.props.current_over,
+                        this.props.innings,
+                        calculated);
+    this.props.updateScore(calculated.toString(), is_ball);
+    this.props.updateBowler(this.props.current_bowler,
+                            is_extra,
+                            calculated,
+                            this.props.innings)
+
+    this.props.updateRuns(this.props.innings,
+                          parseInt(runs),
+                          is_extra)
+
+    if (parseInt(runs) % 2 == 1){
+      this.props.toogleStrike(this.props.innings);
+    }
+
     this.setState({
-      onBallPrompt: false
+      onBallPrompt: false,
+      bowlerAlreadySelected: false
     })
   }
 
@@ -125,8 +143,13 @@ class ScoreBoard extends Component{
 
   handleAddBatsman(e, data){
     const {player} = data.formData;
-    if(this.props.batsmans.length < 2)
-        this.props.addBatsman(player, this.props.innings);
+    const batsmanOnPitch = this.props.batsmans.filter((bat) => !bat.isOut && !bat.inPavilion)
+    if(batsmanOnPitch.length < 2){
+      if(batsmanOnPitch.length > 0 && batsmanOnPitch[0].strike)
+          this.props.addBatsman(player, this.props.innings, false);
+      else
+          this.props.addBatsman(player, this.props.innings, true);
+    }
     else
         this.props.addPlayer(player, this.props.innings);
   }
@@ -148,7 +171,10 @@ class ScoreBoard extends Component{
     console.log(this);
     this.props.selectBowler(data.formData.player);
     this.props.nextOver(this.props.gridprops.innings,
-                        this.props.overs.length, data.formData.player);
+                        this.props.overs.length,
+                        data.formData.player);
+    this.props.updateOver(this.props.overs.length);
+    this.props.toogleStrike(this.props.innings);
     this.setState({
       onBowlerSelect: false,
       onBowlerModelOpen: false
@@ -162,6 +188,10 @@ class ScoreBoard extends Component{
        this.setState({
          onBowlerModelOpen: true
        })
+    }else{
+      this.setState({
+        bowlerAlreadySelected: true
+      })
     }
   }
 
@@ -212,7 +242,8 @@ let mapStateToProps = (state) => {
   overs: state.overs.filter((over) => over.innings == state.playing.innings),
   innings: state.playing.innings,
   current_over: state.playing.overs,
-  balls: state.playing.balls
+  balls: state.playing.balls,
+  current_bowler: state.currentover.bowler
   }
 }
 

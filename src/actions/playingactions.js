@@ -20,3 +20,10 @@ export function completeInnings(){
     type: 'COMPLETE_INNINGS'
   }
 }
+
+export function updateOver(over){
+  return {
+    type: "UPDATE_OVER",
+    over: over
+  }
+}

@@ -21,6 +21,10 @@ export default function playing(state={}, action){
         return Object.assign({}, state, {
           is_complete: true
         });
+    case 'UPDATE_OVER':
+       return Object.assign({}, state, {
+         overs: action.over
+       })
 
      default:
        return state;

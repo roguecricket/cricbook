@@ -32,3 +32,7 @@ export function getRuns(res){
   const runs = res.extra in RUN_MAP ? 1: 0;
   return parseInt(res.runs) + parseInt(runs);
 }
+
+export function isExtra(run){
+  return run.extra in RUN_MAP;
+}

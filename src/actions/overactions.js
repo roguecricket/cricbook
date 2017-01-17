@@ -7,11 +7,12 @@ export function nextOver(innings, over, bowler){
   }
 }
 
-export function nextBall(run, over, innings){
+export function nextBall(run, over, innings, total){
   return {
     type: "NEXT_BALL",
     run: run,
     over: over,
-    innings: innings
+    innings: innings,
+    total: total
   }
 }
