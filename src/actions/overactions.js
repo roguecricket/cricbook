@@ -6,3 +6,12 @@ export function nextOver(innings, over, bowler){
     innings
   }
 }
+
+export function nextBall(run, over, innings){
+  return {
+    type: "NEXT_BALL",
+    run: run,
+    over: over,
+    innings: innings
+  }
+}

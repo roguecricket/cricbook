@@ -8,7 +8,7 @@ export default function overs(state = [], action) {
         runs: 0,
         figures: []
       }]
-    case "NEW_BALL":
+    case "NEXT_BALL":
       return state.map((over) => over.over == action.over && over.innings == action.innings ? { ...over,
         figures: [...over.figures, action.run]
       } : over)

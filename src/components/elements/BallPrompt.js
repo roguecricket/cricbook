@@ -34,7 +34,7 @@ class BallPrompt extends Component{
             <Form.Field style={{color: "white"}}>
               <label> Extras </label>
               <Form.Field> <Radio  toggle name="extra" value="NB" label="No Ball" /> </Form.Field>
-              <Form.Field> <Radio  toggle name="extra" value="WB" label="Wide Ball"/> </Form.Field>
+              <Form.Field> <Radio  toggle name="extra" value="WD" label="Wide Ball"/> </Form.Field>
               <Form.Field> <Radio  toggle name="extra" value="B" label="Byes"/></Form.Field>
               <Form.Field> <Radio  toggle name="extra" value="LB" label="Leg Byes"/></Form.Field>
               <Form.Field>  <Radio  toggle name="extra" value="WICKET" label="Wicket" /></Form.Field>

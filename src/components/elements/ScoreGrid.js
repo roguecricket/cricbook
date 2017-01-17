@@ -16,13 +16,15 @@ class ScoreGrid extends Component{
       super(props);
     }
     render(){
-      const {batting_team, runs, wickets, batting, bowlers} = this.props;
+      console.log(this.props);
+      const {batting_team, runs, wickets, batting, bowlers, overs} = this.props;
       return (
                <Grid.Row centered>
                <Grid.Column width={10}>
                  <Segment>
                    <Header as="h1">{batting_team}</Header>
                    <Header as="h2">{runs+"/"+wickets}</Header>
+                   <Header as="h3">{overs}</Header>
                    <Divider horizontal> Batting </Divider>
 
                      <Table>
@@ -82,12 +84,10 @@ ScoreGrid.defaultProps = {
   batting: [],
   bowlers: [],
   target: undefined,
-  overs: "0.0",
   batting_team: "untitled"
 }
 
 ScoreGrid.propTypes = {
-  runs: PropTypes.number.isRequired,
   wickets: PropTypes.number.isRequired,
   batting: PropTypes.array.isRequired,
   overs: PropTypes.string.isRequired,

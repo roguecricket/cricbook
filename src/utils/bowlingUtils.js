@@ -11,12 +11,12 @@ export function getOvers(balls){
 }
 
 export function getOverInfo(figures){
-  const mappedFigurs = figures.map((fig) => fig.extras && fig.extras != "WICKET" ? {
-    balls: fig.extras in RUN_MAP ? 0 : 1,
-    runs: fig.runs + fig.extras in RUN_MAP ? 0 : 1
+  const mappedFigurs = figures.map((fig) => fig.extra && fig.extra != "WICKET" ? {
+    balls: fig.extra in RUN_MAP ? 0 : 1,
+    runs: parseInt(fig.runs) + fig.extra in RUN_MAP ? 0 : 1
   } : {
     balls: 1,
-    runs: fig.runs
+    runs: parseInt(fig.runs)
   });
 
   return mappedFigurs.reduce(function(a, b){
@@ -25,4 +25,10 @@ export function getOverInfo(figures){
       runs: a.runs + b.runs
     }
   });
+}
+
+export function getRuns(res){
+  console.log(res);
+  const runs = res.extra in RUN_MAP ? 1: 0;
+  return parseInt(res.runs) + parseInt(runs);
 }

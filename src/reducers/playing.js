@@ -9,17 +9,19 @@ export default function playing(state={}, action){
             runs: 0,
             wickets: 0,
             overs: 0,
+            balls:0,
             is_complete: false
           });
      case 'UPDATE_SCORE':
          return Object.assign({}, state, {
-           runs: state.runs + action.runs
+           runs: state.runs + parseInt(action.runs),
+           balls: state.balls + parseInt(action.balls)
          });
      case 'COMPLETE_INNINGS':
         return Object.assign({}, state, {
           is_complete: true
         });
-     
+
      default:
        return state;
     }

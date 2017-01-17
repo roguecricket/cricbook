@@ -7,10 +7,11 @@ export function newInnings(batting, bowling, innings){
   }
 }
 
-export function updateScore(runs){
+export function updateScore(runs, balls){
   return {
     type: 'UPDATE_SCORE',
-    runs: runs
+    runs: runs,
+    balls
   }
 }
 

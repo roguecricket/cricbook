@@ -10,19 +10,10 @@ const app_state = {
     runs: 0,
     overs: 0,
     wickets: 0,
-    is_complete: false
+    is_complete: false,
+    innings: 0
   },
-  current_over: {
-    strike: 'batman1',
-    nonstrike: 'batman2',
-    bowling: 'bowler',
-    is_over_complete: false,
-    balls: 0,
-    runs: 0,
-    wickets: 0
-  },
-  batting: {units:[[]]},
-  bowling: [[]],
-  falling: [[]],
-  overs: [[]]
+  batting: [],
+  bowling: [],
+  overs: []
 }
