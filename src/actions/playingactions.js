@@ -36,3 +36,9 @@ export function addTeamName(name){
     innings: 1
   }
 }
+
+export function addWicket(){
+  return {
+    type: 'ADD_WICKET'
+  }
+}

@@ -25,6 +25,10 @@ export default function playing(state={innings: 1, runs: 0, wickets: 0, overs: 0
        return Object.assign({}, state, {
          overs: action.over
        })
+    case 'ADD_WICKET':
+       return Object.assign({}, state, {
+         wickets: state.wickets + 1
+       })
 
      default:
        return state;

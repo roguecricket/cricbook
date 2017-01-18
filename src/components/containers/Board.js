@@ -137,6 +137,7 @@ class ScoreBoard extends Component{
 
     if(extra == "WICKET"){
       this.props.wicket();
+      this.props.addWicket();
     }
 
     this.setState({
