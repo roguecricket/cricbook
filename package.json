@@ -47,11 +47,11 @@
     "redux": "^3.6.0",
     "redux-devtools-dispatch": "^2.2.0",
     "redux-form": "^6.3.2",
-    "redux-saga": "^0.13.0",
-    "semantic-ui": "^2.2.7",
-    "semantic-ui-react": "^0.63.5"
+    "redux-saga": "^0.13.0"
   },
   "devDependencies": {
+    "semantic-ui": "^2.2.7",
+    "semantic-ui-react": "^0.63.5",
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
     "babel-polyfill": "^6.20.0",
