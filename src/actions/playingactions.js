@@ -27,3 +27,12 @@ export function updateOver(over){
     over: over
   }
 }
+
+export function addTeamName(name){
+  return {
+    type: 'NEW_INNINGS',
+    batting: name,
+    bowling: undefined,
+    innings: 1
+  }
+}

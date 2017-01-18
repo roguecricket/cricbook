@@ -7,6 +7,7 @@ export default function bowling(state=[], action){
          maidens: 0,
          runs: 0,
          balls: 0,
+         wickets: 0,
          innings: action.innings
        }]
      case 'UPDATE_BOWLER':

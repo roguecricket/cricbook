@@ -1,4 +1,4 @@
-export default function playing(state={}, action){
+export default function playing(state={innings: 1, runs: 0, wickets: 0, overs: 0, balls: 0}, action){
 
     switch(action.type){
       case 'NEW_INNINGS':

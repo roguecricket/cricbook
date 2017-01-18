@@ -12,6 +12,8 @@ import {
   Table
 } from 'semantic-ui-react';
 import AddPlayerModal from './AddPlayerModal';
+import * as bowlingUtils from '../../utils/bowlingUtils';
+
 
 
 class BowlingGrid extends Component{
@@ -33,7 +35,7 @@ class BowlingGrid extends Component{
             <Table.Header>
               <Table.Row>
               <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Maidens</Table.HeaderCell>
+              <Table.HeaderCell>Runs</Table.HeaderCell>
               <Table.HeaderCell>Wickets</Table.HeaderCell>
               <Table.HeaderCell>Overs</Table.HeaderCell>
               </Table.Row>
@@ -43,9 +45,9 @@ class BowlingGrid extends Component{
                 players.map((bowl) => (
                   <Table.Row >
                     <Table.Cell>{bowl.name}</Table.Cell>
-                    <Table.Cell>{bowl.maidens}</Table.Cell>
+                    <Table.Cell>{bowl.runs}</Table.Cell>
                     <Table.Cell>{bowl.wickets}</Table.Cell>
-                    <Table.Cell>{bowl.overs}</Table.Cell>
+                    <Table.Cell>{bowlingUtils.getOvers(bowl.balls)}</Table.Cell>
                   </Table.Row>
                 ))
               }

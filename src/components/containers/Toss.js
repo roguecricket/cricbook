@@ -38,7 +38,7 @@ class Toss extends Component{
     }else{
       this.props.newInnings(other, won, 1);
     }
-    browserHistory.push("/batting");
+    browserHistory.push("/board");
   }
 }
 

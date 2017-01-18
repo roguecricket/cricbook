@@ -10,6 +10,8 @@ import {
   Header,
   Divider
 } from 'semantic-ui-react';
+import * as bowlingUtils from '../../utils/bowlingUtils';
+
 
 class ScoreGrid extends Component{
     constructor(props){
@@ -62,7 +64,7 @@ class ScoreGrid extends Component{
                        bowlers.map(function(bowling){
                          return( <Table.Row>
                           <Table.Cell singleLine>{bowling.name}</Table.Cell>
-                          <Table.Cell singleLine>{bowling.overs}</Table.Cell>
+                          <Table.Cell singleLine>{bowlingUtils.getOvers(bowling.balls)}</Table.Cell>
                           <Table.Cell singleLine>{bowling.maidens}</Table.Cell>
                           <Table.Cell singleLine>{bowling.wickets}</Table.Cell>
                           </Table.Row>)
