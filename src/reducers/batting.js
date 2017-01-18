@@ -26,7 +26,9 @@ export default function batting(state = [], action) {
       }]
 
     case 'WICKET':
-      return state.map((bat) => bat.name == action.name ? { ...bat,
+      return state.map((bat) => bat.strike == true
+                                && !bat.inPavilion
+                                && !bat.isOut ? { ...bat,
         remarks: action.remarks,
         isOut: true
       } : bat)

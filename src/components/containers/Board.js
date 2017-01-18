@@ -108,6 +108,7 @@ class ScoreBoard extends Component{
 
   handleRuns(e, data){
     e.preventDefault();
+    console.log(data.formData);
     const {runs, extra} = data.formData;
     const is_ball = extra && extra != "WICKET" ? 0 : 1;
     const is_extra = !bowlingUtils.isExtra(data.formData)
@@ -129,6 +130,10 @@ class ScoreBoard extends Component{
 
     if (parseInt(runs) % 2 == 1){
       this.props.toogleStrike(this.props.innings);
+    }
+
+    if(extra == "WICKET"){
+      this.props.wicket();
     }
 
     this.setState({

@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import DevTools from '../../dev/devTool';
-import {Container} from 'semantic-ui-react';
+import {Container, Header, Grid, Divider} from 'semantic-ui-react';
+
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -11,6 +12,13 @@ class App extends Component{
 
   render(){
     return (<Container>
+               <Grid>
+                 <Grid.Row centered>
+                  <Grid.Column>
+                    <Header as="h1">Welcome to Cricboard</Header>
+                  </Grid.Column>
+                 </Grid.Row>
+               </Grid>
                {this.props.children}
                {!isProduction && <DevTools />}
             </Container>)

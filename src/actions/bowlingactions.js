@@ -15,3 +15,10 @@ export function updateBowler(name, is_ball, runs, innings){
     innings: innings
   }
 }
+
+export function updateWickets(bowlername){
+  return {
+    type: "UPDATE_WICKETS",
+    name: bowlername
+  }
+}

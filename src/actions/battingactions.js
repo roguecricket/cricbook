@@ -37,3 +37,9 @@ export function updateRuns(innings, runs, is_ball){
     is_ball
   }
 }
+
+export function wicket(){
+  return {
+    type: "WICKET"
+  }
+}
