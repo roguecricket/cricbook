@@ -41,7 +41,7 @@ class ScoreGrid extends Component{
                         {
                           batting.map(function(batsman){
                             return (<Table.Row>
-                                    <Table.Cell singleLine>{batsman.name}</Table.Cell>
+                                    <Table.Cell singleLine>{batsman.name + (batsman.strike ? "*": "")}</Table.Cell>
                                     <Table.Cell singleLine>{batsman.runs}</Table.Cell>
                                     </Table.Row>)
                           })
@@ -55,7 +55,6 @@ class ScoreGrid extends Component{
                      <Table.Row>
                      <Table.HeaderCell>Name</Table.HeaderCell>
                      <Table.HeaderCell>Overs</Table.HeaderCell>
-                     <Table.HeaderCell>Maidens</Table.HeaderCell>
                      <Table.HeaderCell>Wickets</Table.HeaderCell>
                      </Table.Row>
                      </Table.Header>
@@ -65,7 +64,6 @@ class ScoreGrid extends Component{
                          return( <Table.Row>
                           <Table.Cell singleLine>{bowling.name}</Table.Cell>
                           <Table.Cell singleLine>{bowlingUtils.getOvers(bowling.balls)}</Table.Cell>
-                          <Table.Cell singleLine>{bowling.maidens}</Table.Cell>
                           <Table.Cell singleLine>{bowling.wickets}</Table.Cell>
                           </Table.Row>)
                        })

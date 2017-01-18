@@ -49,6 +49,7 @@ class ScoreBoard extends Component{
       <BallPrompt open={this.state.onBallPrompt}
                   onClose={this.handleClose.bind(this)}
                   onOk={this.handleRuns.bind(this)}
+                  batting={gridprops.batting}
                   heading= "Add Runs and Wickets"/>
 
       <AddPlayerModal heading="Add a Bowler"
@@ -112,7 +113,7 @@ class ScoreBoard extends Component{
   handleRuns(e, data){
     e.preventDefault();
     console.log(data.formData);
-    const {runs, extra} = data.formData;
+    const {runs, extra, batsman} = data.formData;
     const is_ball = extra && extra != "WICKET" ? 0 : 1;
     const is_extra = !bowlingUtils.isExtra(data.formData)
     const calculated = bowlingUtils.getRuns(data.formData);
@@ -136,7 +137,13 @@ class ScoreBoard extends Component{
     }
 
     if(extra == "WICKET"){
-      this.props.wicket();
+      if(!batsman){
+        console.log("updating wickets");
+        this.props.wicket();
+        this.props.updateWickets(this.props.current_bowler);
+      }
+      else
+         this.props.batsmanOut(batsman);
       this.props.addWicket();
     }
 

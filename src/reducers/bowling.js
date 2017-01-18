@@ -17,7 +17,7 @@ export default function bowling(state=[], action){
          balls:  bowl.balls + (action.is_ball ? 1 : 0)
        } : bowl)
     case 'UPDATE_WICKETS':
-       return state.map((bowl) => bowl.name == action.name && bowl.innings == action.innings ? {
+       return state.map((bowl) => bowl.name == action.name ? {
          ...bowl,
          wickets: bowl.wickets + 1
        }: bowl)

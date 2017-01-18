@@ -53,6 +53,12 @@ export default function batting(state = [], action) {
         balls: bat.balls + (action.is_ball ? 1 : 0)
       } : bat)
 
+    case 'BATSMAN_OUT':
+      return state.map((bat) => !bat.isOut && !bat.inPavilion && bat.name == action.name ? {
+        ...bat,
+        isOut: true
+      } : bat)
+
     default:
       return state;
   }

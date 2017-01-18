@@ -9,7 +9,8 @@ import {
   Icon,
   Input,
   Button,
-  Radio
+  Radio,
+  Select
 } from 'semantic-ui-react';
 
 
@@ -19,6 +20,7 @@ class BallPrompt extends Component{
   }
 
   render(){
+    const vals = this.props.batting.map((player) => ({text: player.name, value: player.name}));
     return (<Modal open={this.props.open}
            onClose={this.props.onClose} size='small'>
        <Modal.Header>
@@ -39,6 +41,10 @@ class BallPrompt extends Component{
               <Form.Field> <Radio  toggle name="extra" value="LB" label="Leg Byes"/></Form.Field>
               <Form.Field>  <Radio  toggle name="extra" value="WICKET" label="Wicket" /></Form.Field>
               <Form.Field> <Radio  toggle name="extra" value="DEAD" label="Dead" /></Form.Field>
+            </Form.Field>
+            <Form.Field>
+              <label> Mark player </label>
+              <Select name='batsman' options={vals} />
             </Form.Field>
             <Form.Field>
               <Button color='green' type='submit' inverted>

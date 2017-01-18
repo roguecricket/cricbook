@@ -43,3 +43,10 @@ export function wicket(){
     type: "WICKET"
   }
 }
+
+export function batsmanOut(name){
+  return {
+    type: "BATSMAN_OUT",
+    name
+  }
+}
