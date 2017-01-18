@@ -3,7 +3,7 @@ import * as actionCreators from '../../actions/';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
-import {Form, Segment, Button, Input} from 'semantic-ui-react';
+import {Form, Segment, Button, Input, Grid, Header} from 'semantic-ui-react';
 
 class TeamName extends Component{
   constructor(props){
@@ -13,6 +13,13 @@ class TeamName extends Component{
   render(){
     return (
       <Segment>
+      <Grid>
+        <Grid.Row centered>
+         <Grid.Column>
+           <Header as="h1">Welcome to Cricboard</Header>
+         </Grid.Column>
+        </Grid.Row>
+      </Grid>
       <Form onSubmit={this.handleTeamName.bind(this)}>
         <Form.Field>
          <label> Team Name </label>
