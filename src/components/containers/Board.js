@@ -4,7 +4,8 @@ import React, {
 } from 'react';
 import {
   Grid,
-  Button
+  Button,
+  Divider
 } from 'semantic-ui-react';
 import ScoreGrid from '../elements/ScoreGrid'
 import BallPrompt from '../elements/BallPrompt'
@@ -75,6 +76,8 @@ class ScoreBoard extends Component{
         <Grid.Row centered>
           <Grid.Column width={10}>
             <Button fluid primary onClick={this.handleUpdate.bind(this)}>Update</Button>
+            <Divider horizontal>OR</Divider>
+            <Button fluid primary onClick={this.handleReset.bind(this)}>Reset</Button>
           </Grid.Column>
         </Grid.Row>
       <Grid.Row centered>
@@ -226,6 +229,11 @@ class ScoreBoard extends Component{
     this.setState({
       onBowlerModelOpen: false
     })
+  }
+
+  handleReset(e){
+    localStorage.clear();
+     location.reload();
   }
 
 }

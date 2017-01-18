@@ -10,6 +10,11 @@ class TeamName extends Component{
     super(props);
   }
 
+  componentWillMount(){
+     if(this.props.name && this.props.name != "untitled")
+        browserHistory.push("/board")
+  }
+
   render(){
     return (
       <Segment>
@@ -45,6 +50,12 @@ let mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actionCreators, dispatch);
 }
 
-TeamName = connect(null, mapDispatchToProps)(TeamName);
+let mapStateToProps = (state) => ({
+  name: state.playing.batting
+})
+
+
+
+TeamName = connect(mapStateToProps, mapDispatchToProps)(TeamName);
 
 export default TeamName;

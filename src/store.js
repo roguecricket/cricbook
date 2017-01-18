@@ -7,6 +7,7 @@ import { reducers } from "./reducers/index";
 import { sagas } from "./sagas/index";
 import devToolsEnhancer, { composeWithDevTools }  from 'remote-redux-devtools';
 import DevTools from './dev/devTool';
+import {loadState, saveState} from './utils/localStore';
 
 // add the middlewares
 let middlewares = [];
@@ -45,9 +46,15 @@ else{
   enhancers =  compose(middleware, DevTools.instrument());
 }
 
-const store = createStore(reducers, {}, enhancers);
+
+let persistedState = loadState()
+const store = createStore(reducers, persistedState, enhancers);
 const history = syncHistoryWithStore(browserHistory, store);
 sagaMiddleware.run(sagas);
+
+store.subscribe(() => {
+  saveState(store.getState());
+})
 
 // export
 export { store, history };
