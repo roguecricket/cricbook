@@ -22,14 +22,14 @@ class ScoreGrid extends Component{
       const {batting_team, runs, wickets, batting, bowlers, overs} = this.props;
       return (
                <Grid.Row centered>
-               <Grid.Column width={10}>
+               <Grid.Column width={16}>
                  <Segment>
                    <Header as="h1">{batting_team}</Header>
                    <Header as="h2">{runs+"/"+wickets}</Header>
                    <Header as="h3">{overs}</Header>
                    <Divider horizontal> Batting </Divider>
 
-                     <Table>
+                     <Table stackable={true}>
                        <Table.Header>
                        <Table.Row>
                        <Table.HeaderCell>Name</Table.HeaderCell>
@@ -50,7 +50,7 @@ class ScoreGrid extends Component{
                        </Table.Body>
                      </Table>
                    <Divider horizontal>Bowling</Divider>
-                   <Table>
+                   <Table stackable={true}>
                      <Table.Header>
                      <Table.Row>
                      <Table.HeaderCell>Name</Table.HeaderCell>

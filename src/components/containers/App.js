@@ -11,7 +11,7 @@ class App extends Component{
   }
 
   render(){
-    return (<Container>
+    return (<Container fluid>
                {this.props.children}
                {!isProduction && <DevTools />}
             </Container>)

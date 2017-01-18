@@ -74,20 +74,20 @@ class ScoreBoard extends Component{
 
       <ScoreGrid {...gridprops}></ScoreGrid>
         <Grid.Row centered>
-          <Grid.Column width={10}>
+          <Grid.Column width={16}>
             <Button fluid primary onClick={this.handleUpdate.bind(this)}>Update</Button>
             <Divider horizontal>OR</Divider>
             <Button fluid primary onClick={this.handleReset.bind(this)}>Reset</Button>
           </Grid.Column>
         </Grid.Row>
       <Grid.Row centered>
-        <Grid.Column width={10}>
+        <Grid.Column width={16}>
           <BattingGrid players={this.props.batsmans}
                        handleOk={this.handleAddBatsman.bind(this)}/>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row centered>
-        <Grid.Column width={10}>
+        <Grid.Column width={16}>
           <BowlingGrid players={this.props.bowlers}
                        handleOk={this.handleAddBowler.bind(this)}/>
         </Grid.Column>
